@@ -1147,8 +1147,7 @@ static unsigned long shrink_page_list(struct list_head *page_list,
 		if (page_mapped(page) && mapping) {
 			switch (ret = try_to_unmap(page, lazyfree ?
 				(ttu_flags | TTU_BATCH_FLUSH | TTU_LZFREE) :
-				(ttu_flags | TTU_BATCH_FLUSH),
-				sc->target_vma)) {
+				(ttu_flags | TTU_BATCH_FLUSH))) {
 			case SWAP_FAIL:
 				goto activate_locked;
 			case SWAP_AGAIN:

@@ -1720,8 +1720,7 @@ static int page_mapcount_is_zero(struct page *page)
  * SWAP_FAIL	- the page is unswappable
  * SWAP_MLOCK	- page is mlocked.
  */
-int try_to_unmap(struct page *page, enum ttu_flags flags,
-				struct vm_area_struct *vma)
+int try_to_unmap(struct page *page, enum ttu_flags flags)
 {
 	int ret;
 	struct rmap_private rp = {
@@ -1734,7 +1733,6 @@ int try_to_unmap(struct page *page, enum ttu_flags flags,
 		.arg = &rp,
 		.done = page_mapcount_is_zero,
 		.anon_lock = page_lock_anon_vma_read,
-		.target_vma = vma,
 	};
 
 	/*
